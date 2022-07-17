@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Category } from "src/categories/entities/category.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { TaskStatus } from "../tasks-status";
 
 
@@ -17,4 +18,12 @@ export class Task {
     @Column()
     status: TaskStatus;
 
+    @Column({
+        type: 'timestamp',
+        default: () => 'CURRENT_TIMESTAMP(6)'
+    })
+    createdAt: Date
+
+    @ManyToOne(() => Category, category => category.tasks)
+    category: Category
 }
