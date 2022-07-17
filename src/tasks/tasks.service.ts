@@ -47,6 +47,13 @@ export class TasksService {
     throw new HttpException('Task not found', HttpStatus.NOT_FOUND);
   }
 
+  async updateStatus(id: number, status: TaskStatus): Promise<Task> {
+    const task = await this.findOne(id);
+    task.status = status;
+    await this.taskRepository.save(task);
+    return task
+  }
+
   async remove(id: number) {
     const task = await this.taskRepository.delete(id);
     if(!task.affected){
