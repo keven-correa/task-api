@@ -3,12 +3,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TasksModule } from './tasks/tasks.module';
-import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
+      database: 'tasks_management_db',
       host: 'localhost',
       port: 5432,
       username: 'postgres',
@@ -17,7 +17,6 @@ import { CategoriesModule } from './categories/categories.module';
       synchronize: true,
     }),
     TasksModule,
-    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,4 +1,3 @@
-import { Category } from "src/categories/entities/category.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { TaskStatus } from "../tasks-status";
 
@@ -24,6 +23,5 @@ export class Task {
     })
     createdAt: Date
 
-    @ManyToOne(() => Category, category => category.tasks)
-    category: Category
+    
 }

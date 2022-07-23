@@ -10,11 +10,12 @@ export class TasksService {
   constructor(@InjectRepository(Task) private taskRepository: Repository<Task>) {}
 
   async create(createTaskDto: CreateTaskDto): Promise<Task> {
-    const {title, description} = createTaskDto;
+    const {title, description, categoryId} = createTaskDto;
+    
      const newTask = this.taskRepository.create({
         title,
         description,
-        status: TaskStatus.OPEN
+        status: TaskStatus.OPEN,
     });
 
     await this.taskRepository.save(newTask)
@@ -31,7 +32,7 @@ export class TasksService {
     const foundTask = await this.taskRepository.findOne({where: {id}});
 
     if(!foundTask){
-      throw new NotFoundException(`The task with ${id} not found.`);
+      throw new NotFoundException(`The task with id:${id} not found.`);
     }
     return foundTask;
   }
